@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>RequireJS - Hyatt E-Comm Team</title>
+
+		<meta name="description" content="Require JS Talk">
+		<meta name="author" content="Nigam Patel">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1 style="text-transform: none;">RequireJS</h1>
+					<h3>A JavaScript Module Loader</h3>
+					<p>
+						<small>Presented by <a href="http://patelnigam.com">Nigam Patel</a> / <a href="http://twitter.com/nigam02">@nigam02</a></small>
+					</p>
+					<img src="lib/images/requirejs-logo.png" alt="RequireJs" style="border: 0">
+				</section>
+
+  			<section>
+	        <h3>Most Projects Start Like This:</h3>
+	        <p>JavaScript files are included as HTML script tags</p>
+
+             <pre><code data-trim contenteditable>
+             <body>
+'               <script src='jquery.js'></script>
+                <script src='jquery-ui.js'></script>
+                <script src='init.js'></script>
+                <script src='app.js'></script>
+              </body>
+            </code></pre>
+        </section>
+
+				<section>
+        <h3>What's the problem?</h3>
+   					<ul>
+							<div class="fragment">
+								<li>JavaScript tags block page rendering</li>
+							</div>
+							<div class="fragment">
+								<li>Each file can potentially be dependent on other files</li>
+							</div>
+							<div class="fragment">
+								<li>Not Every JavaScript file is needed when the page first loads</li>
+							</div>
+							<div class="fragment">
+								<li>No Encapsulation, Namespace pollution</li>
+							</div>
+							<div class="fragment">
+								<center><img src="lib/images/blazzing.gif" style="border: 0"></center>
+							</div>
+						</ul>
+        </section>
+
+        <section>
+        	<h3>Solution</h3>
+   					<ul>
+							<div class="fragment">
+								<img src="lib/images/dancing-baby.gif" style="border: 0">
+							</div>
+							<div class="fragment">
+								<img src="lib/images/requirejs-logo.png" alt="RequireJs" style="border: 0">
+							</div>
+						</ul>
+        </section>
+
+        <section>
+        <h3>Asynchronous Module Definition</h3>
+	        <ul>
+						<li>Modules are encapsulated.</li>
+						<li>Create and reuse code from different part of the site.</li>
+						<li>Structured, clean codebase.</li>
+						<li>Async loading, managed dependencies.</li>
+						<li>Lazy load modules (stuff not used by the user yet can be loaded in background when needed on demand).</li>
+						<li>Not a technology, but a specification proposal.</li>
+					</ul>	
+        </section>
+
+       <!-- <section>
+        	<h3>Who is using RequireJS</h3>
+	        <ul>
+						
+					</ul>	
+        </section> -->
+
+        <section>
+        	<h2>2 important concepts</h2>
+					<div><br></div>
+					<h3><br></h3>
+					<h3>
+						<span>define() vs require()</span><br>
+					</h3>
+				</section>
+
+				<section>
+					<h2>Define()</h2>
+					Creates a module that can be used by other modules.<br/> <br/>
+					define(<span class="fragment highlight-current-blue">id?,</span> <span class="fragment highlight-current-blue">[dependencies]?, </span> <span class="fragment highlight-current-blue">factory</span>)
+					<div class="fragment">
+								<img src="lib/images/define.png" alt="define" style="border: 0">
+					</div>
+				</section>
+
+				<section>
+					<h2>require()</h2>
+					When you only need to use modules, not create them. <br/><br/>
+					require(<span class="fragment highlight-current-blue">[dependencies]?</span>, <span class="fragment highlight-current-blue">factory</span>)
+										<div class="fragment">
+								<img src="lib/images/require.png" alt="RequireJs" style="border: 0">
+					</div>
+				</section>
+
+				<section>
+					<h2>config</h2>
+<p><font color="yellow">baseUrl</font></p>
+<p><span style="text-align: left;">Root path for module lookups.</span></p>
+<p><span style="text-align: left;"><br></span></p>
+<p><span style="font-size: 36.41456604003906px; font-style: normal; font-variant: normal; text-align: left; color: yellow;">waitSeconds</span></p>
+<p><span style="text-align: left;">Number of seconds before&nbsp;timing out.</span></p>
+<p><span style="text-align: left;"><br></span></p>
+<p><span style="font-size: 36.41456604003906px; font-style: normal; font-variant: normal; text-align: left; color: yellow;">paths</span></p>
+<p><span style="text-align: left;">Location of the modules or library.</span></p>
+<p><span style="text-align: left;"><br></span><span style="font-size: 36.41456604003906px; font-style: normal; font-variant: normal; text-align: left; color: yellow;">shim</span></p>
+<p><span style="text-align: left;">Libraries that don't support AMD, but you need to manage their dependencies.</span></p>
+				</section>
+
+				<section data-background="lib/images/matrix.gif">
+					<!--<h2 class="fragment highlight-red">Show me the Code</h2> -->
+				</section>
+
+				<section>
+					<h2>Recap</h2>
+							<div class="fragment">
+								<li>define()</li>
+							</div>
+							<div class="fragment">
+								<li>require()</li>
+							</div>
+							<div class="fragment">
+								<li>config</li>
+								baseUrl, waitSeconds, paths, shim
+							</div>
+							<div class="fragment">
+								<img src="lib/images/clapping.gif" alt="clap" style="border: 0">
+							</div>
+				</section>
+				<section>
+					<h2>Future - ES6 - Modules</h2>
+							<div class="fragment">
+								<h3>Module definition</h3>
+								module [module ID] </br />
+								export [variable | function]
+							</div>
+							<br/>
+							<div class="fragment">
+								<h3>Module dependency</h3>
+								import {[var | fn ]} from [module ID]
+							</div>
+				</section>
+				<section>
+        	<h3>Resources on require.js</h3>
+        			What is <a href="https://github.com/amdjs/amdjs-api/wiki/AMD">AMD</a>?<br/>
+        			<a href="http://addyosmani.com/writing-modular-js/">Writing Modular JavaScript With AMD, CommonJS & ES Harmony</a> by Addy Osmani<br/>
+							<a href="http://www.nixtu.info/2011/02/how-to-structure-your-application-using.html">How to structure your app using require.js</a><br/>
+							<a href="http://unscriptable.com/code/Using-AMD-loaders/#0">Modular Javascript</a><br/>
+							<a href="http://jrburke.com/">James Burke's Blog</a><br/>
+							require.js 3 part series screencast by Cary Landholt
+							<ol>
+							<li><a href="http://www.youtube.com/watch?v=VGlDR1QiV3A">basics part 1</a></li>
+							<li><a href="http://www.youtube.com/watch?v=9BYBNPvcqwo">basics part 2</a></li>
+							<li><a href="http://www.youtube.com/watch?v=m6VNhqKDM4E">optimizer</a></li>
+							</ol><br />
+							Other example <a href="https://net.tutsplus.com/articles/web-roundups/for-your-script-loading-needs/">for your script loading needs</a>
+
+        </section> 		
+
+        <!--section>
+        	<h3>Modular Design Pattern</h3>
+   					<ul>
+							<div class="fragment">
+								<li>Anonymous Function (Function definition)</li>
+							</div>
+							<div class="fragment">
+								<li>Add the namespace to Anonymous</li>
+							</div>
+							<div class="fragment">
+								<li>Creating closure</li>
+							</div>
+						</ul>
+        </section-->       
+
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
